@@ -211,5 +211,9 @@ __marimo__/
 .env.*
 !.env.example
 
+uv.lock
 
 
+intro.py
+
+__pycache__

@@ -54,7 +54,7 @@ def join_context(matches):
         if text:
             texts.append(text)
 
-    return "\n\n".join(texts)
+    return texts
 
 
 
@@ -80,9 +80,16 @@ def init_app(final_prompt):
         connection_pool_maxsize=50
     )
 
+    # Initialize Reranker
+    from sentence_transformers import CrossEncoder
+    reranker = CrossEncoder("BAAI/bge-reranker-base")
+
     return {
         "llm": llm,
         "embedding_model": embedding_model,
         "chain": chain,
-        "index": index
+        "index": index,
+        "reranker": reranker,
+        "bm25_retrievers": {},
+        "bm25_corpora": {}
     }
